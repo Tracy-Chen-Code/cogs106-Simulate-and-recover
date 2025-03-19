@@ -10,12 +10,19 @@ Boundary separation (a) represents the amount of evidence required to make a dec
 
 In our analysis, we computed estimation bias (Bias) and mean squared error (MSE). Ideally, the bias should average to zero, and MSE should decrease as the sample size increases. Since we randomly selected model parameters within predefined ranges, the results are different from times to times. For example, in one run, I got the results like this:
 Starting EZ Diffusion Model Simulate-and-Recover Experiment...
- N   Bias_a   Bias_v   Bias_t0    MSE_a   MSE_v   MSE_t0
+
+N      Bias_a      Bias_v      Bias_t0     MSE_a     MSE_v     MSE_t0
+ 
 10 0.214403 0.126333 -0.023423 0.374084 0.66112 0.024606
- N  Bias_a   Bias_v  Bias_t0    MSE_a    MSE_v   MSE_t0
+
+N     Bias_a      Bias_v      Bias_t0     MSE_a      MSE_v     MSE_t0
+ 
 40 0.02684 0.021995 0.000666 0.041122 0.144515 0.004862
-   N    Bias_a    Bias_v  Bias_t0    MSE_a    MSE_v   MSE_t0
+
+N     Bias_a      Bias_v      Bias_t0      MSE_a      MSE_v     MSE_t0
+   
 4000 -0.000304 -0.000261 0.000009 0.000156 0.001178 0.000045
+
 Our results showed that when N=10, the recovered parameters had relatively large biases and high MSE values compared to N=40 and N=4000. As N increased to 40, all biases decreased(for boundary separation, it decreases from 0.214403 to 0.02684; for drift rate, it decreases from 0.126333 to 0.021995; for non-decision time, it decreases from 0.023423 to 0.000666), and all MSE were reduced accordingly. When N reached 4000, all the estimated biases were close to zero, and all MSE dropped significantly. These findings align with theoretical expectations, demonstrating that as sample size increases, the EZ diffusion model improves in its ability to recover its own parameters.
 
 In summary, this project confirms that the EZ diffusion model can accurately estimate its own parameters under ideal conditions. However, in small sample cases (e.g., N=10), the estimation accuracy was significantly lower due to increased variability and a greater likelihood of parameter misestimation. The recovered values in these cases deviated substantially from the true parameters, leading to larger estimation errors. As the sample size increased to N=40, the accuracy of parameter recovery improved, with biases decreasing and estimation errors becoming more stable. When N reached 4000, the recovery process became highly reliable, with biases converging toward zero and mean squared errors reaching minimal levels. This trend highlights the importance of larger sample sizes when applying the EZ diffusion model, as greater data availability leads to more precise and consistent parameter recovery. These findings reinforce the model's validity as a cognitive modeling tool while emphasizing its limitations in small-sample conditions, where estimation noise can be considerable.
